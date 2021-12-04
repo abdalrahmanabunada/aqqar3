@@ -101,7 +101,7 @@ class MenuController extends BaseController
             $req["users_id"] = $user->id; 
 
             $count = menu::where('id',$id)->count();
-
+             
             if($count > 0){
                 menu::where('id',$id)->update([
                     'title' => $request['title'],
