@@ -24,6 +24,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ArticleController;
 
 use App\Http\Controllers\Admin\StaticPageController;
+
+use App\Http\Controllers\Admin\MenuController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -201,6 +203,20 @@ Route::get('/admin/staticpage/index/ajax', [StaticPageController::class, 'ajax']
 
 Route::post('/admin/staticpage/active', [StaticPageController::class, 'tbl_active'])->name('staticpage-active');
 Route::get('/admin/staticpage/getimg/{id?}', [StaticPageController::class, 'getimg'])->name('admin.staticpage.getimg');
+
+
+
+
+Route::get('/admin/menu/add', [MenuController::class, 'add'])->name('admin.menu.add');
+Route::post('/admin/menu/add', [MenuController::class, 'addpost'])->name('admin.menu.add');
+
+Route::get('/admin/menu/edit/{id?}', [MenuController::class, 'edit'])->name('admin.menu.edit');
+Route::post('/admin/menu/edit/{id?}', [MenuController::class, 'editpost'])->name('admin.menu.edit');
+
+Route::get('/admin/menu/index', [MenuController::class, 'index'])->name('admin.menu.index');
+Route::get('/admin/menu/index/ajax', [MenuController::class, 'ajax'])->name('admin.menu.index.ajax');
+
+Route::post('/admin/menu/active', [MenuController::class, 'tbl_active'])->name('menu-active');
     
 
 

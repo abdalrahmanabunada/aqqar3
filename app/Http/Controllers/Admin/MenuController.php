@@ -27,11 +27,13 @@ class MenuController extends BaseController
 		$validator = Validator::make($request->all(), [
             'title' => 'required|max:200',
             'link' => 'required|max:200',
-            'order' => 'required',
-            'parentid' => 'required'
+            'order' => 'required|numeric',
+            'typeid'   => 'required|numeric'
         ], [], __('menu'));
 
         $active = $request->active ? 1 : 0;
+        $external = $request->external ? 1 : 0;
+        $newtap = $request->newtap ? 1 : 0;
         
 		if ($validator->passes()) 
         {
@@ -47,7 +49,10 @@ class MenuController extends BaseController
             'link' => $request['link'],
             'order' => $request['order'],
             'parentid' => $request['parentid'],
-            'active' => $active
+            'active' => $active,
+            'external' => $external,
+            'typeid' => $request['typeid'],
+            'newtap'    => $request['newtap']
             ]);
             //$count = Profile::where('users_id', '=', ["{$userid}"])->count();
             
@@ -71,7 +76,7 @@ class MenuController extends BaseController
         $user = auth()->user();
         $userid = $user->id;
         $obj = menu::where('id', '=', ["{$id}"])->first();
-
+        //dd($obj->first()->active);
         if($obj){
                 $cats = Menu::get();
                 return view('cp.menu.edit', compact('obj', 'cats'));
@@ -86,10 +91,12 @@ class MenuController extends BaseController
             'title' => 'required|max:200',
             'link' => 'required|max:200',
             'order' => 'required',
-            'parentid' => 'required'      
+            'typeid'   => 'required'
         ], [], __('menu'));
         
         $active = $request->active ? 1 : 0;
+        $external = $request->external ? 1 : 0;
+        $newtap = $request->newtap ? 1 : 0;
 
 		if ($validator->passes()) 
         {
@@ -108,7 +115,10 @@ class MenuController extends BaseController
                     'link' => $request['link'],
                     'order' => $request['order'],
                     'parentid' => $request['parentid'],
-                    'active' => $active
+                    'active' => $active,
+                    'external' => $external,
+                    'typeid' => $request['typeid'],
+                    'newtap' => $newtap,
                 ]);
             }
             else{
@@ -150,6 +160,7 @@ class MenuController extends BaseController
 		$page = $page + 1;
 		
 		$q = $request->q;
+        $typeid = $request->typeid;
 
         $user = auth()->user();
         $userid = $user->id;
@@ -165,6 +176,11 @@ class MenuController extends BaseController
         if($q){
             $data = $data->where(function($query) use ($q){
                 $query->orWhere('title', 'like', '%' . $q . '%');
+            });
+        }
+        if($typeid){
+            $data = $data->where(function($query) use ($typeid){
+                $query->orWhere('typeid', '=', $typeid);
             });
         }
         if($ch_date == 1){
