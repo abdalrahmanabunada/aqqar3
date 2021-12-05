@@ -2,12 +2,16 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Http",
     "\\app\\Http\\Controllers",
     "\\app\\Http\\Controllers\\Admin",
     "\\app\\Models",
-    "\\routes"
+    "\\resources",
+    "\\resources\\lang",
+    "\\resources\\lang\\ar",
+    "\\resources\\views",
+    "\\resources\\views\\cp",
+    "\\resources\\views\\cp\\menu"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\MenuController.php",
+  "SelectedNode": "\\.env",
   "PreviewInSolutionExplorer": false
 }
