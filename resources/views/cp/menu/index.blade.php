@@ -69,6 +69,18 @@
 											    <input type="text" id="date_to" class="form-control date" placeholder="تاريخ الى" />
 											</div>
                                         </div>
+                                        <div class="col-md-3">
+									        <div class="form-group">
+										        <label>{{__("menu.parentid")}}</label>
+                                                <select id="parentid" name="parentid" class="form-control">
+                                                    <option value="">إختر من القائمة</option>
+                                                    @foreach ($cats as $cat)
+                                                        <option value="{{$cat->id}}" class="parentid_{{$cat->id}}"> {{ $cat->title }}</option>
+                                                    @endforeach
+                                                </select>
+										        <span class="fv-plugins-message-container invalid-feedback" role="alert"><strong class="error_text"></strong></span>
+									        </div>
+								        </div>
                                     </div>
                                     <div class="row">
                                         <div class="d-flex align-items-center position-relative my-5" style="margin-top:-15px;">
@@ -100,8 +112,9 @@
 																    <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt-datatable .form-check-input" value="1" />
 															    </div>
 														    </th>
-														    <th style="padding-right: 10px;" width="50%">العنوان</th>
+														    <th style="padding-right: 10px;" width="30%">العنوان</th>
                                                             <th style="padding-right: 10px;">الحالة</th>
+                                                            <th width="20%">تابع الى</th>
 														    <th>تاريخ الإدخال</th>
 														    <th class="text-end min-w-100px">{{__('user.Actions')}}</th>
 													    </tr>
@@ -152,7 +165,7 @@
             date_from: document.getElementById("date_from").value,
             date_to: document.getElementById("date_to").value,
             typeid: document.getElementById("typeid").value,
-
+            parentid: document.getElementById("parentid").value,
              _token: $("[name=_token]").val(),
              length: len,
              sort_by: sort_by,
@@ -222,6 +235,9 @@ var KTDatatablesServerSide = function () {
                     data: "active"
                 },
                 {
+                    data: "parentid"
+                },
+                {
                     'data': 'created_at' ,
                     "type": "date",
                     "render": function (value) {
@@ -253,8 +269,24 @@ var KTDatatablesServerSide = function () {
 							return '<div class="badge badge-light-danger fw-bolder">Disable</div>'
 					}
 				},
+                {
+                    targets: 3,
+                    data: null,
+                    orderable: !1,
+                    className: "text-end",
+                    render: function(e, t, n) {
+                    console.log(n);
+                    var x = '';
+						if(n.parentid != ''){
+                            x = $( ".parentid_" + n.parentid).text();
+                            return '<div class=" fw-bolder">'+x+'</div>'
+                        }
+						//else
+						//	return '<div class="badge badge-light-danger fw-bolder">'+x+'</div>'
+					}
+				},
 				{
-                    targets: 4,
+                    targets: 5,
                     data: null,
                     orderable: !1,
                     className: "text-end",

@@ -147,7 +147,8 @@ class MenuController extends BaseController
     }
     public function index()
     {
-        return view('cp.menu.index');
+        $cats = Menu::get();
+        return view('cp.menu.index', compact("cats"));
     }
     public function ajax(Request $request)
     {
@@ -161,6 +162,7 @@ class MenuController extends BaseController
 		
 		$q = $request->q;
         $typeid = $request->typeid;
+        $parentid = $request->parentid;
 
         $user = auth()->user();
         $userid = $user->id;
@@ -183,6 +185,11 @@ class MenuController extends BaseController
                 $query->orWhere('typeid', '=', $typeid);
             });
         }
+        if($parentid){
+            $data = $data->where(function($query) use ($parentid){
+                $query->orWhere('parentid', '=', $parentid);
+            });
+        }
         if($ch_date == 1){
             if($date_from){
                 $date = explode('/', $date_from);
@@ -201,8 +208,13 @@ class MenuController extends BaseController
 
 		$total = $data->get()->count();
 
+        //$data = $data->select("`id`, (select `title` from `menus` where `parentid` = `id`) AS `dd`"); // (select `title` from `menus` where `parentid` = id) as pt
+        //dd($data->get()->toArray());
+
 		$data = $data->paginate($length, ['*'], 'page', $page)->all();
+
         
+
 		$totalRecords = $total;
 		$totalDisplay = $total;
 		$result = [
