@@ -13,11 +13,15 @@ class BaseController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('admin.permission');
-        $menu = $this->middleware('admin.menu');
+        $this->middleware('admin.menu');
+        //$this->middleware('admin.menujson');
+        //$co = Cookie::get('menu555');
 
-        $co = Cookie::get('menu');
+        //dd("ffffffffff");
+
         //dd($co);
-        View::share('menu', $co);
+         
+        //View::share('menu', $co);
     }
 
 }

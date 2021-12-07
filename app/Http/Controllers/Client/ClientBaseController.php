@@ -15,9 +15,9 @@ class ClientBaseController extends Controller
         $this->middleware('client.permission');
         $menu = $this->middleware('client.menu');
 
-        $co = Cookie::get('menuCl');
+        //$co = Cookie::get('menuCl');
         //dd($co);
-        View::share('menuCl', $co);
+        //View::share('menuCl', $co);
     }
 
 }

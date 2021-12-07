@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'authClient' => \App\Http\Middleware\AuthenticateClient::class, 
         'admin.menu' => \App\Http\Middleware\AdminMenu::class,
+        //'admin.menujson' => \App\Http\Middleware\AdminMenuJson::class,
         'client.menu' => \App\Http\Middleware\ClientMenu::class,
         'client.permission' => \App\Http\Middleware\ClientCheckPermission::class,
         'is_verify_email' => \App\Http\Middleware\IsVerifyEmail::class,

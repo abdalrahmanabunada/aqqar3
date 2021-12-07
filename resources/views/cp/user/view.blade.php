@@ -8,6 +8,8 @@
 
 
 @section('content')
+
+
 	<form class="docs-content d-flex flex-column flex-column-fluid ViewController" id="kt_docs_content" name="ViewController" id="ViewController" method="post" ng-controller="ViewController">
     						<input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
 

@@ -13,10 +13,6 @@ class ClientMenu
 {
     public function handle($request, Closure $next)
     {
-        $request = $next($request);
-        //جيب اسم الرابط الذي نحن به
-        //$routeName = \Route::currentRouteName();
-        
         $user = auth()->user();
 
         if(!$user['active']){
@@ -77,31 +73,12 @@ class ClientMenu
                 }
 		    }
 		    $json = json_encode($tree);
-            //dd($tree);
-            //Session::flash('menu', $json);
-            //dd($json);
-            //Session::put('menu', $json);
-            //View::share('menu', $json);
-            //$request->put('menu', $json);
         }
-        //dd($request);
-        if(strpos($routeName, 'down') !== false)
-        {
-            return $request;
-        }
-        else if(strpos($routeName, 'export') !== false)
-        {
-            return $request;
-        }
-        else if(strpos($routeName, 'Csv') !== false)
-        {
-            return $request;
-        }
-        else if(strpos($routeName, 'getimg') !== false)
-        {
-            return $request;
-        }
-        return $request->withCookie(cookie()->forever('menuCl', $json));
+        view()->share('menu', $json);
+                //dd($json);
+
+        //dd(view());
+        return $next($request);
     }
     public function perm_tree_fun($id, $userid, $user) {
 		$padre =  Link::where([['parent_id','=',$id]])->get()->toArray();  

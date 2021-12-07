@@ -4200,15 +4200,15 @@ ul.typeahead.dropdown-menu a {
         <script>
             window.onbeforeunload = function(event)
             {
-                delete_cookie("menuCl") ;
+                //delete_cookie("menuCl") ;
             };
             function delete_cookie(name) {
-              document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+              //document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             }
         </script>
         @php
             /*$menu = Session::get('menu');*/
-            $menu = Cookie::get('menuCl');
+            /*$menu = Cookie::get('menuCl');*/
         @endphp
 	'   <script>
             var menu = '{{$menu}}';

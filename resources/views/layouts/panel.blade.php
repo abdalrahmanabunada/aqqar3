@@ -4089,15 +4089,16 @@
         <script>
             window.onbeforeunload = function(event)
             {
-                delete_cookie("menu") ;
+                console.log("hi");
+                //delete_cookie("menu") ;
             };
             function delete_cookie(name) {
-              document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+              //document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             }
         </script>
         @php
             /*$menu = Session::get('menu');*/
-            $menu = Cookie::get('menu');
+            /*$menu = Cookie::get('menu');*/
         @endphp
 	'   <script>
             var menu = '{{$menu}}';

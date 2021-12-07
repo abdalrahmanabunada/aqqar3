@@ -16,7 +16,7 @@ class ClientHomeController extends Controller
     public function __construct()
     {
         //$this->middleware('is_verify_email');
-        //$this->middleware('client.menu');
+        $this->middleware('client.menu');
     }
     public function index(){
         $user = Auth::user();

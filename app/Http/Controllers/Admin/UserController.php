@@ -16,6 +16,7 @@ class UserController extends BaseController
 {
 	public function create()
     {
+        
         return view('cp.user.create');
     }
 	public function store(Request $request)
@@ -132,12 +133,16 @@ class UserController extends BaseController
 			]);
 	}
 
-	public function view()
+	public function view(Request $request)
     {
     /*user_rols::create([
 				    'users_id' =>  1,
 				    'roles_id' => 1
 			    ]);*/
+                        //$request->attributes->add(['myAttribute' => 'ggggggg']);
+
+                $rr = $request->get('myAttribute');
+         //dd($rr);
         return view('cp.user.view');
     }
 	public function user_get_data(Request $request)
